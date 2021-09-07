@@ -1,0 +1,11 @@
+services:
+    image_utilities.image_manager:
+        class: Drupal\image_utilities\ImageManager
+        arguments:
+            - '@entity_type.manager'
+
+    image_utilities.image_style_extension:
+        class: Drupal\image_utilities\Twig\Extension\ImageStyleExtension
+        tags: [{ name: twig.extension }]
+        arguments:
+            - '@image_utilities.image_manager'

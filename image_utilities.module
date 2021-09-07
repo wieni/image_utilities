@@ -1,0 +1,11 @@
+<?php
+
+use Drupal\image_utilities\Plugin\Field\FieldType\ImageItem;
+
+/**
+ * Implements @see hook_field_info_alter().
+ */
+function image_utilities_field_info_alter(array &$definitions): void
+{
+    $definitions['image']['class'] = ImageItem::class;
+}
