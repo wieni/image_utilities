@@ -56,7 +56,7 @@ class ImageManager implements ImageManagerInterface
         }
 
         if (!$file instanceof FileInterface) {
-            return $file;
+            return null;
         }
 
         return $this->getImageUrl($file, $imageStyleId);
