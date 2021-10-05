@@ -19,7 +19,7 @@ class ImageManager implements ImageManagerInterface
         $this->entityTypeManager = $entityTypeManager;
     }
 
-    public function getImageUrl(FileInterface $file, string $imageStyleId): ?string
+    public function getImageUrl(FileInterface $file, string $imageStyleId, bool $directUrlIfNotSupported = false): ?string
     {
         $storage = $this->entityTypeManager->getStorage('image_style');
 
@@ -30,13 +30,17 @@ class ImageManager implements ImageManagerInterface
         $path = $file->getFileUri();
 
         if (!$imageStyle->supportsUri($path)) {
+            if ($directUrlIfNotSupported) {
+                return $file->createFileUrl(false);
+            }
+
             return null;
         }
 
         return $imageStyle->buildUrl($path);
     }
 
-    public function getImageUrlByAnyObject($file, string $imageStyleId): ?string
+    public function getImageUrlByAnyObject($file, string $imageStyleId, bool $directUrlIfNotSupported = false): ?string
     {
         if ($file instanceof EntityReferenceItem) {
             $file = $file->get('entity')->getValue();
@@ -59,6 +63,6 @@ class ImageManager implements ImageManagerInterface
             return null;
         }
 
-        return $this->getImageUrl($file, $imageStyleId);
+        return $this->getImageUrl($file, $imageStyleId, $directUrlIfNotSupported);
     }
 }
