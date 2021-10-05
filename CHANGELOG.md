@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Add directUrlIfNotSupported parameter to service & Twig extension
+- Add relative parameter to Twig extension
 - Remove 'default' image style id fallback from Twig extension
 
 ## [1.0.1] - 2021-09-15

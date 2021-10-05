@@ -24,12 +24,16 @@ class ImageStyleExtension extends AbstractExtension
         ];
     }
 
-    public function applyImageStyle($file, string $style, bool $directUrlIfNotSupported = false): ?string
+    public function applyImageStyle($file, string $style, bool $relative = true, bool $directUrlIfNotSupported = false): ?string
     {
         // TODO: Dispatch cache metadata
 
         $url = $this->imageManager->getImageUrlByAnyObject($file, $style, $directUrlIfNotSupported);
 
-        return file_url_transform_relative($url);
+        if ($url && $relative) {
+            return file_url_transform_relative($url);
+        }
+
+        return $url;
     }
 }
