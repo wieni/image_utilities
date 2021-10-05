@@ -24,7 +24,7 @@ class ImageStyleExtension extends AbstractExtension
         ];
     }
 
-    public function applyImageStyle($file, string $style = 'default', bool $directUrlIfNotSupported = false): ?string
+    public function applyImageStyle($file, string $style, bool $directUrlIfNotSupported = false): ?string
     {
         // TODO: Dispatch cache metadata
 
