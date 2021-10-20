@@ -6,6 +6,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 use Drupal\file\FileInterface;
 use Drupal\image\Plugin\Field\FieldType\ImageItem;
+use Drupal\image_utilities\Exception\ImageStyleNotFoundException;
 use Drupal\media\MediaInterface;
 
 class ImageManager implements ImageManagerInterface
@@ -24,7 +25,7 @@ class ImageManager implements ImageManagerInterface
         $storage = $this->entityTypeManager->getStorage('image_style');
 
         if (!$imageStyle = $storage->load($imageStyleId)) {
-            return null;
+            throw new ImageStyleNotFoundException($imageStyleId);
         }
 
         $path = $file->getFileUri();
